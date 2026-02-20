@@ -30,59 +30,104 @@
       typing();
     }
 
-    // 获取IP
-    fetch("https://ipapi.co/json/")
-      .then(res => res.json())
-      .then(ipData => {
+    // ===============================
+    // 腾讯 IP 接口（JSONP 方式）
+    // ===============================
+    function fetchIP() {
+      const script = document.createElement("script");
+      script.src =
+        "https://apis.map.qq.com/ws/location/v1/ip?key=J3IBZ-AOTKT-IN5XL-LFYPV-HUGGK-BXFGO&output=jsonp&callback=handleTencentIP";
+      document.body.appendChild(script);
+    }
 
-        const city = ipData.city || "未知";
-        const country = ipData.country_name || "";
-        const ip = ipData.ip || "";
+    // 腾讯回调函数（必须是全局）
+    window.handleTencentIP = function (res) {
 
-        const lines = [
-          ">>> 系统连接成功...",
-          `>>> 访问来源：${country} ${city}`,
-          `>>> 当前 IP：${ip}`,
-          ">>> 欢迎访问我的博客"
-        ];
+      if (!res || !res.result) {
+        printFallback();
+        return;
+      }
 
-        let index = 0;
+      const country = res.result.ad_info.nation || "未知";
+      const province = res.result.ad_info.province || "";
+      const city = res.result.ad_info.city || "";
+      const ip = res.result.ip || "";
 
-        function printNextLine() {
-          if (index >= lines.length) {
-            fetchHitokoto();
-            return;
-          }
+      const lines = [
+        ">>> 系统连接成功...",
+        `>>> 访问来源：${country} ${province} ${city}`,
+        `>>> 当前 IP：${ip}`,
+        ">>> 欢迎访问我的博客"
+      ];
 
-          const line = document.createElement("div");
-          line.className = "gradient-text";
-          output.appendChild(line);
+      let index = 0;
 
-          typeWriter(lines[index], line, 35, () => {
-            index++;
-            printNextLine();
-          });
+      function printNextLine() {
+        if (index >= lines.length) {
+          fetchHitokoto();
+          return;
         }
 
-        printNextLine();
+        const line = document.createElement("div");
+        line.className = "gradient-text";
+        output.appendChild(line);
 
-      });
+        typeWriter(lines[index], line, 35, () => {
+          index++;
+          printNextLine();
+        });
+      }
 
+      printNextLine();
+    };
+
+    // 如果腾讯失败的备用方案
+    function printFallback() {
+      const lines = [
+        ">>> 系统连接成功...",
+        ">>> 无法获取定位信息",
+        ">>> 欢迎访问我的博客"
+      ];
+
+      let index = 0;
+
+      function printNextLine() {
+        if (index >= lines.length) {
+          fetchHitokoto();
+          return;
+        }
+
+        const line = document.createElement("div");
+        line.className = "gradient-text";
+        output.appendChild(line);
+
+        typeWriter(lines[index], line, 35, () => {
+          index++;
+          printNextLine();
+        });
+      }
+
+      printNextLine();
+    }
+
+    // ===============================
     // 一言
+    // ===============================
     function fetchHitokoto() {
       fetch("https://v1.hitokoto.cn/")
         .then(res => res.json())
         .then(data => {
-
           hitokotoLine.className = "gradient-text";
           typeWriter(">>> " + data.hitokoto, hitokotoLine, 40);
-
         })
         .catch(() => {
           hitokotoLine.className = "gradient-text";
           hitokotoLine.innerHTML = ">>> 欢迎访问本站";
         });
     }
+
+    // 启动 IP 获取
+    fetchIP();
 
   });
 
@@ -93,14 +138,8 @@
 const style = document.createElement("style");
 style.innerHTML = `
 
-/* 公告标题“欢迎访问”渐变 */
 .card-widget.card-announcement .item-headline span{
-  background: linear-gradient(
-    90deg,
-    #00ffe5,
-    #00c3ff,
-    #00ffe5
-  );
+  background: linear-gradient(90deg,#00ffe5,#00c3ff,#00ffe5);
   background-size:300% 300%;
   -webkit-background-clip:text;
   -webkit-text-fill-color:transparent;
@@ -119,23 +158,16 @@ style.innerHTML = `
   overflow:hidden;
 }
 
-/* 所有文字渐变 */
 .gradient-text{
   margin-bottom:4px;
   font-weight:600;
-  background: linear-gradient(
-    90deg,
-    #00ffe5,
-    #00c3ff,
-    #00ffe5
-  );
+  background: linear-gradient(90deg,#00ffe5,#00c3ff,#00ffe5);
   background-size:300% 300%;
   -webkit-background-clip:text;
   -webkit-text-fill-color:transparent;
   animation: gradientMove 6s ease infinite;
 }
 
-/* 渐变流动动画 */
 @keyframes gradientMove{
   0%{background-position:0% 50%}
   50%{background-position:100% 50%}
@@ -143,4 +175,4 @@ style.innerHTML = `
 }
 
 `;
-document.head.appendChild(style); 
+document.head.appendChild(style);
