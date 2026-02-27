@@ -4,13 +4,31 @@
   
     
     <entry>
-      <title></title>
-      <link href="/post/0.html"/>
-      <url>/post/0.html</url>
+      <title>MySQL information_schema 数据库详解</title>
+      <link href="/post/10bec79e.html"/>
+      <url>/post/10bec79e.html</url>
       
-        <content type="html"><![CDATA[<p>-–<br>title: MySQL information_schema 数据库详解<br>date: 2026-02-27<br>categories: 数据库<br>tags:<br>  - MySQL<br>  - information_schema<br>  - SQL注入<br>  - 数据库基础<br>-–</p><p>[TOC]</p><p>本文介绍 MySQL 中 information_schema 数据库的作用，以及常见的三个重要表：</p><p>- schemata<br>- tables<br>- columns</p><h1 id="information-schema-存储数据库下的数据库名及表名，列名信息的数据库"><a href="#information-schema-存储数据库下的数据库名及表名，列名信息的数据库" class="headerlink" title="information_schema(存储数据库下的数据库名及表名，列名信息的数据库 )"></a>information_schema(存储数据库下的数据库名及表名，列名信息的数据库 )</h1><h2 id="information-schema-schemata：-记录数据库名信息的表"><a href="#information-schema-schemata：-记录数据库名信息的表" class="headerlink" title="information_schema.schemata：(记录数据库名信息的表 )"></a>information_schema.schemata：(记录数据库名信息的表 )</h2><p>&#x3D;&#x3D;SCHEMA_NAME(数据库名)&#x3D;&#x3D;</p><p><img src="https://img.418408.xyz/blog/20260227231031783.webp"></p><h2 id="information-schema-tables：-记录表名信息的表"><a href="#information-schema-tables：-记录表名信息的表" class="headerlink" title="information_schema.tables：(记录表名信息的表 )"></a>information_schema.tables：(记录表名信息的表 )</h2><p>&#x3D;&#x3D;table_schema(记录数据库名的列名值)&#x3D;&#x3D;</p><p>&#x3D;&#x3D;table_name(记录表名的列名值 )&#x3D;&#x3D;</p><p><img src="https://img.418408.xyz/blog/20260227230936064.webp"></p><h2 id="information-schema-columns：-记录列名信息表"><a href="#information-schema-columns：-记录列名信息表" class="headerlink" title="information_schema.columns：(记录列名信息表 )"></a>information_schema.columns：(记录列名信息表 )</h2><p>&#x3D;&#x3D;column_name(记录列名的列名值 )&#x3D;&#x3D;</p><p><img src="https://img.418408.xyz/blog/20260227230718438.webp"></p>]]></content>
+        <content type="html"><![CDATA[<p>本文介绍 MySQL 中 information_schema 数据库的作用，以及常见的三个重要表：</p><ul><li>schemata</li><li>tables</li><li>columns</li></ul><h1 id="information-schema（存储数据库下的数据库名、表名、列名信息的数据库）"><a href="#information-schema（存储数据库下的数据库名、表名、列名信息的数据库）" class="headerlink" title="information_schema（存储数据库下的数据库名、表名、列名信息的数据库）"></a>information_schema（存储数据库下的数据库名、表名、列名信息的数据库）</h1><h2 id="information-schema-schemata（记录数据库名信息的表）"><a href="#information-schema-schemata（记录数据库名信息的表）" class="headerlink" title="information_schema.schemata（记录数据库名信息的表）"></a>information_schema.schemata（记录数据库名信息的表）</h2><p><strong>SCHEMA_NAME（数据库名）</strong></p><p><img src="https://img.418408.xyz/blog/20260227231031783.webp"></p><h2 id="information-schema-tables（记录表名信息的表）"><a href="#information-schema-tables（记录表名信息的表）" class="headerlink" title="information_schema.tables（记录表名信息的表）"></a>information_schema.tables（记录表名信息的表）</h2><p><strong>table_schema（数据库名）</strong></p><p><strong>table_name（表名）</strong></p><p><img src="https://img.418408.xyz/blog/20260227230936064.webp"></p><h2 id="information-schema-columns（记录列名信息的表）"><a href="#information-schema-columns（记录列名信息的表）" class="headerlink" title="information_schema.columns（记录列名信息的表）"></a>information_schema.columns（记录列名信息的表）</h2><p><strong>column_name（列名）</strong></p><p><img src="https://img.418408.xyz/blog/20260227230718438.webp"></p>]]></content>
       
       
+      <categories>
+          
+          <category> 数据库 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> MySQL </tag>
+            
+            <tag> information_schema </tag>
+            
+            <tag> SQL注入 </tag>
+            
+            <tag> 数据库基础 </tag>
+            
+        </tags>
       
     </entry>
     
